@@ -1,9 +1,27 @@
-<footer class="border-t border-slate-200">
-  <div class="container py-8 text-sm text-slate-600 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-    <div>© {new Date().getFullYear()} knaAPPS. All rights reserved.</div>
-    <div class="flex gap-4">
-      <a class="link" href="/contact">Contact</a>
-      <a class="link" href="/work">Work</a>
+<footer class="border-t border-white/10">
+  <div class="container py-10 text-sm text-slate-300 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <img
+        src="/brand/knaapps-logo.png"
+        alt="knaAPPS"
+        class="h-8 w-8 rounded-xl border border-white/10 bg-white/5 p-1"
+        loading="lazy"
+      />
+      <div>
+        <div class="text-slate-100 font-semibold">knaAPPS</div>
+        <div class="text-slate-400 -mt-0.5">Applicable Solutions</div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <a class="badge hover:border-white/25" href="/contact">Contact</a>
+      <a class="badge hover:border-white/25" href="/work">Work</a>
+      <a class="badge hover:border-white/25" href="/services">Services</a>
+      <a class="badge hover:border-white/25" href="https://apps.knaapps.net" target="_blank" rel="noopener">Live Apps</a>
+    </div>
+
+    <div class="text-slate-500">
+      © {new Date().getFullYear()} knaAPPS. All rights reserved.
     </div>
   </div>
 </footer>

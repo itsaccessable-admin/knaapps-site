@@ -3,11 +3,22 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
+  --kna-bg: #070a10;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  @apply bg-white text-slate-900 antialiased;
+  background:
+    radial-gradient(1000px 600px at 20% 10%, rgba(30, 107, 255, 0.28), transparent 60%),
+    radial-gradient(900px 600px at 80% 20%, rgba(249, 115, 22, 0.24), transparent 55%),
+    radial-gradient(700px 500px at 50% 90%, rgba(34, 211, 238, 0.12), transparent 55%),
+    var(--kna-bg);
+  @apply text-slate-100 antialiased;
 }
 
 .container {
@@ -15,13 +26,21 @@ body {
 }
 
 .card {
-  @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+  @apply rounded-2xl border border-white/10 bg-white/5 shadow-sm backdrop-blur;
 }
 
 .badge {
-  @apply inline-flex items-center rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-700;
+  @apply inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 font-semibold text-white;
+  background: linear-gradient(90deg, #1E6BFF 0%, #F97316 100%);
+}
+.btn-primary:hover {
+  filter: brightness(1.05);
 }
 
 .link {
-  @apply text-slate-900 underline decoration-slate-300 underline-offset-4 hover:decoration-slate-900;
+  @apply text-slate-100 underline decoration-white/30 underline-offset-4 hover:decoration-white/70;
 }

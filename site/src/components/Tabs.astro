@@ -6,7 +6,12 @@ const { tabs, active } = Astro.props;
   {tabs.map((t) => (
     <a
       href={t.href}
-      class={"badge " + (t.label === active ? "border-slate-400 text-slate-900" : "text-slate-700 hover:border-slate-300")}
+      class={
+        "badge " +
+        (t.label === active
+          ? "border-white/25 bg-white/10 text-slate-100"
+          : "text-slate-300 hover:text-slate-100 hover:border-white/25")
+      }
     >
       {t.label}
     </a>

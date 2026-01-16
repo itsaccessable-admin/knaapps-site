@@ -6,15 +6,41 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" }
 ];
+
+const current = Astro.url.pathname;
+const isActive = (href) => (href === "/" ? current === "/" : current.startsWith(href));
 ---
 
-<header class="border-b border-slate-200">
+<header class="sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur">
   <div class="container py-4 flex items-center justify-between">
-    <a href="/" class="font-semibold tracking-tight text-lg">knaAPPS</a>
-    <nav class="flex gap-4 text-sm">
+    <a href="/" class="flex items-center gap-3">
+      <img
+        src="/brand/knaapps-logo.png"
+        alt="knaAPPS"
+        class="h-9 w-9 rounded-xl border border-white/10 bg-white/5 p-1"
+        loading="eager"
+      />
+      <div class="leading-tight">
+        <div class="font-semibold tracking-tight text-lg text-slate-100">knaAPPS</div>
+        <div class="text-xs text-slate-300 -mt-0.5">Applicable Solutions</div>
+      </div>
+    </a>
+
+    <nav class="flex items-center gap-2 text-sm">
       {links.map((l) => (
-        <a class="text-slate-700 hover:text-slate-900" href={l.href}>{l.label}</a>
+        <a
+          class={
+            "px-3 py-2 rounded-full border " +
+            (isActive(l.href)
+              ? "border-white/20 bg-white/10 text-slate-100"
+              : "border-transparent text-slate-300 hover:text-slate-100 hover:border-white/15 hover:bg-white/5")
+          }
+          href={l.href}
+        >
+          {l.label}
+        </a>
       ))}
+      <a class="btn-primary ml-2" href="/contact">Request a Quote</a>
     </nav>
   </div>
 </header>
