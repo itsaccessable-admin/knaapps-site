@@ -1,16 +1,23 @@
-# ---- Build Astro ----
-FROM node:20-alpine AS build
+# -------- Build stage --------
+FROM node:20-alpine AS builder
 WORKDIR /app
 
+# Copy only the Astro site workspace
 COPY site/package.json site/package-lock.json* ./site/
-WORKDIR /app/site
-RUN npm ci
+RUN cd site && npm install
 
-COPY site/ ./
-RUN npm run build
+COPY site ./site
+RUN cd site && npm run build
 
-# ---- Serve with Nginx ----
-FROM nginx:1.27-alpine
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/site/dist /usr/share/nginx/html
+# -------- Runtime stage --------
+FROM nginx:alpine
+
+# Copy a default nginx config if you have one (optional)
+# If you already have nginx configs in /nginx, we can use them.
+# Otherwise, nginx default works for static sites.
+
+# Copy build output to nginx html directory
+COPY --from=builder /app/site/dist /usr/share/nginx/html
+
 EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
