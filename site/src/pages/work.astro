@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Tabs from "../components/Tabs.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+
+const categories = ["All", "Excel", "Access", "GIS", "Web Apps"] as const;
+
+const url = new URL(Astro.request.url);
+const active = (url.searchParams.get("cat") ?? "All") as typeof categories[number];
+
+const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
+---
+
+<BaseLayout title="Work — knaAPPS">
+  <h1 class="text-2xl font-semibold">Work</h1>
+  <p class="mt-2 text-slate-700 max-w-3xl">
+    Projects are grouped by discipline. Where a live system exists, use the “Open App” link to access it via subdomain.
+  </p>
+
+  <div class="mt-5">
+    <Tabs
+      tabs={categories.map((c) => ({
+        label: c,
+        href: c === "All" ? "/work" : `/work?cat=${encodeURIComponent(c)}`
+      }))}
+      active={active}
+    />
+  </div>
+
+  <div class="mt-6 grid gap-4">
+    {filtered.map((p) => (
+      <ProjectCard id={p.slug} title={p.title} summary={p.summary} tags={p.tags} liveUrl={p.liveUrl} />
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const API_BASE = import.meta.env.PUBLIC_CONTACT_API_BASE ?? "https://api.knaapps.net";
+---
+
+<BaseLayout title="Contact — knaAPPS">
+  <h1 class="text-2xl font-semibold">Contact</h1>
+  <p class="mt-2 text-slate-700 max-w-2xl">
+    Send a message and I will respond with next steps. For project requests, include the category and a short description.
+  </p>
+
+  <form class="mt-6 card p-6 max-w-2xl" method="post" action={`${API_BASE}/contact`}>
+    <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" />
+
+    <div class="grid gap-4">
+      <div>
+        <label class="text-sm text-slate-700">Name</label>
+        <input required name="name" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2" />
+      </div>
+
+      <div>
+        <label class="text-sm text-slate-700">Email</label>
+        <input required type="email" name="email" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2" />
+      </div>
+
+      <div>
+        <label class="text-sm text-slate-700">Category</label>
+        <select name="category" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2">
+          <option>Excel</option>
+          <option>Access</option>
+          <option>GIS</option>
+          <option>Web Apps</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="text-sm text-slate-700">Message</label>
+        <textarea required name="message" rows="6" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2"></textarea>
+      </div>
+
+      <button class="badge w-fit hover:border-slate-400" type="submit">Send Message</button>
+    </div>
+  </form>
+
+  <p class="mt-4 text-sm text-slate-600">
+    If the form fails, email directly: <a class="link" href="mailto:contact@knaapps.net">contact@knaapps.net</a>
+  </p>
+</BaseLayout>
